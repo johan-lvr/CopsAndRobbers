@@ -39,6 +39,7 @@ namespace CopsAndRobbers
             char[,] city = new char[Size,Size];
             for (int row = 0; row < Size; row++)
             {
+
                 if (row == 0 || row  == Size-1)
                 {
                     
