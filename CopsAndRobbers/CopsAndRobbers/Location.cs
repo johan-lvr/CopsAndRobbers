@@ -24,29 +24,56 @@ namespace CopsAndRobbers
             Peoples = new List<People>();
             //DisplayLocation();
         }
-        public void DisplayPeople()
+        public void DisplayPeople(int currentPerson)
         {
-            for (int i = 0; i < Peoples.Count; i++)
-            {
-                Console.SetCursorPosition(Peoples[i].PosX, Peoples[i].PosY);
-                if (Peoples[i] is Citizen)
+            //for (int i = 0; i < Peoples.Count; i++)
+            //{
+                Console.SetCursorPosition(Peoples[currentPerson].PosX, Peoples[currentPerson].PosY);
+                if (Peoples[currentPerson] is Citizen)
                 {
+                    Console.ForegroundColor = ConsoleColor.Green;
                     Console.Write("C");
                 }
-                else if (Peoples[i] is Robber)
+                else if (Peoples[currentPerson] is Robber)
                 {
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.Write("R");
                 }
                 else
                 {
+                    Console.ForegroundColor = ConsoleColor.Blue;
                     Console.Write("P");
                 }
+                Console.ForegroundColor= ConsoleColor.White;
+           // }
+        }
+        public void Movement(int currentPerson)
+        {
+            Random rnd = new Random(); 
+            
+            if (Peoples[currentPerson].PosX + Peoples[currentPerson].DirX == 0 || Peoples[currentPerson].PosX + Peoples[currentPerson].DirX == Width ||
+                Peoples[currentPerson].PosY + Peoples[currentPerson].DirY == 0 || Peoples[currentPerson].PosY + Peoples[currentPerson].DirY == Height ||
+                (Peoples[currentPerson].DirX == 0 && Peoples[currentPerson].DirY == 0))
+            {
+                Peoples[currentPerson].DirX = rnd.Next(-1, 2);
+                Peoples[currentPerson].DirY = rnd.Next(-1, 2);
+                
+                
             }
+            else
+            {
+                Console.SetCursorPosition(Peoples[currentPerson].PosX, Peoples[currentPerson].PosY);
+                Console.Write(" ");
+                Peoples[currentPerson].PosY += Peoples[currentPerson].DirY;
+                Peoples[currentPerson].PosX += Peoples[currentPerson].DirX;
+                
+            }
+
         }
 
         
 
-        public void DisplayLocation()
+        public void DisplayLocation() // Draws city border
         {
             
             for (int col = 0; col <= Height; col++)
@@ -93,15 +120,15 @@ namespace CopsAndRobbers
 
             for (int i = 0; i < ammountOfCitizen; i++)
             {
-                peoples.Add(new Citizen($"Medbergoare{i}", rnd.Next(1, Width), rnd.Next(1, Height), rnd.Next(-2, 2), rnd.Next(-2, 2)));
+                peoples.Add(new Citizen($"Medbergoare{i}", rnd.Next(1, Width), rnd.Next(1, Height), rnd.Next(-1, 2), rnd.Next(-1, 2)));
             }
             for (int i = 0; i < ammountOfTheifs; i++)
             {
-                peoples.Add(new Robber($"Tjuv{i}", rnd.Next(1, Width), rnd.Next(1, Height), rnd.Next(-2, 2), rnd.Next(-2, 2)));
+                peoples.Add(new Robber($"Tjuv{i}", rnd.Next(1, Width), rnd.Next(1, Height), rnd.Next(-1, 2), rnd.Next(-1, 2)));
             }
             for (int i = 0; i < ammountOfCops; i++)
             {
-                peoples.Add(new Cop($"Polis{i}", rnd.Next(1, Width), rnd.Next(1, Height), rnd.Next(-2, 2), rnd.Next(-2, 2)));
+                peoples.Add(new Cop($"Polis{i}", rnd.Next(1, Width), rnd.Next(1, Height), rnd.Next(-1, 2), rnd.Next(-1, 2)));
             }
         }
 

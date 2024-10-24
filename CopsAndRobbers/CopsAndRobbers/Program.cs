@@ -21,10 +21,20 @@
             //}
             //Console.ReadLine();
 
-            City City = new City(12,12,12,20,50);
+            City City = new City(12, 12, 12, 20, 50);
             City.DisplayLocation();
-            City.DisplayPeople();
-            Console.ReadKey();
+            
+            while (true)
+            {
+
+                for (int i = 0; i < City.Peoples.Count; i++)
+                {
+                    City.Movement(i);
+                    City.DisplayPeople(i);
+
+                }
+                Console.ReadKey();
+            }
         }
     }
 }
