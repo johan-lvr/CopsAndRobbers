@@ -14,16 +14,17 @@ namespace CopsAndRobbers
         public List<Robber> Prisoners { get; set; }
         public List<People> Peoples { get; set; }
         
-        public int[,] CityGrid { get; set; }
+        public int?[,] CityGrid { get; set; }
 
         public Location(int height, int width)
         {
             Height = height;
             Width = width;
-            CityGrid = new int[height, width];
+            CityGrid = new int?[height, width];
             Peoples = new List<People>();
             //DisplayLocation();
         }
+
         public void DisplayPeople(int currentPerson)
         {
             //for (int i = 0; i < Peoples.Count; i++)
@@ -57,17 +58,21 @@ namespace CopsAndRobbers
             {
                 Peoples[currentPerson].DirX = rnd.Next(-1, 2);
                 Peoples[currentPerson].DirY = rnd.Next(-1, 2);
-                
-                
             }
             else
             {
                 Console.SetCursorPosition(Peoples[currentPerson].PosX, Peoples[currentPerson].PosY);
                 Console.Write(" ");
+                CityGrid[Peoples[currentPerson].PosX, Peoples[currentPerson].PosY] = null;
                 Peoples[currentPerson].PosY += Peoples[currentPerson].DirY;
                 Peoples[currentPerson].PosX += Peoples[currentPerson].DirX;
-                
+                CityGrid[Peoples[currentPerson].PosX, Peoples[currentPerson].PosY] = currentPerson;
             }
+
+        }
+
+        public void Interaction()
+        {
 
         }
 
