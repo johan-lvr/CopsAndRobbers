@@ -20,7 +20,7 @@ namespace CopsAndRobbers
         {
             Height = height;
             Width = width;
-            CityGrid = new int?[height, width];
+            CityGrid = new int?[width, height];
             Peoples = new List<People>();
             //DisplayLocation();
         }
@@ -48,28 +48,28 @@ namespace CopsAndRobbers
                 Console.ForegroundColor= ConsoleColor.White;
            // }
         }
-        public void Movement(int currentPerson)
-        {
-            Random rnd = new Random(); 
-            
-            if (Peoples[currentPerson].PosX + Peoples[currentPerson].DirX == 0 || Peoples[currentPerson].PosX + Peoples[currentPerson].DirX == Width ||
-                Peoples[currentPerson].PosY + Peoples[currentPerson].DirY == 0 || Peoples[currentPerson].PosY + Peoples[currentPerson].DirY == Height ||
-                (Peoples[currentPerson].DirX == 0 && Peoples[currentPerson].DirY == 0))
-            {
-                Peoples[currentPerson].DirX = rnd.Next(-1, 2);
-                Peoples[currentPerson].DirY = rnd.Next(-1, 2);
-            }
-            else
-            {
-                Console.SetCursorPosition(Peoples[currentPerson].PosX, Peoples[currentPerson].PosY);
-                Console.Write(" ");
-                CityGrid[Peoples[currentPerson].PosX, Peoples[currentPerson].PosY] = null;
-                Peoples[currentPerson].PosY += Peoples[currentPerson].DirY;
-                Peoples[currentPerson].PosX += Peoples[currentPerson].DirX;
-                CityGrid[Peoples[currentPerson].PosX, Peoples[currentPerson].PosY] = currentPerson;
-            }
+        //public void Movement(int currentPerson)
+        //{
+        //    Random rnd = new Random();
 
-        }
+        //    if (Peoples[currentPerson].PosX + Peoples[currentPerson].DirX == 0 || Peoples[currentPerson].PosX + Peoples[currentPerson].DirX == Width ||
+        //        Peoples[currentPerson].PosY + Peoples[currentPerson].DirY == 0 || Peoples[currentPerson].PosY + Peoples[currentPerson].DirY == Height ||
+        //        (Peoples[currentPerson].DirX == 0 && Peoples[currentPerson].DirY == 0))
+        //    {
+        //        Peoples[currentPerson].DirX = rnd.Next(-1, 2);
+        //        Peoples[currentPerson].DirY = rnd.Next(-1, 2);
+        //    }
+        //    else
+        //    {
+        //        Console.SetCursorPosition(Peoples[currentPerson].PosX, Peoples[currentPerson].PosY);
+        //        Console.Write(" ");
+        //        CityGrid[Peoples[currentPerson].PosX, Peoples[currentPerson].PosY] = null;
+        //        Peoples[currentPerson].PosY += Peoples[currentPerson].DirY;
+        //        Peoples[currentPerson].PosX += Peoples[currentPerson].DirX;
+        //        CityGrid[Peoples[currentPerson].PosX, Peoples[currentPerson].PosY] = currentPerson;
+        //    }
+
+        //}
 
         public void Interaction()
         {

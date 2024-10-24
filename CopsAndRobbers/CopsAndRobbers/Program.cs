@@ -29,11 +29,12 @@
 
                 for (int i = 0; i < City.Peoples.Count; i++)
                 {
-                    City.Movement(i);
+                    Helpers.Movement2(i, City);
                     City.DisplayPeople(i);
 
                 }
-                Console.ReadKey();
+
+                Console.ReadKey(true);
             }
         }
     }
