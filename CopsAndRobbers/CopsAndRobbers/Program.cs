@@ -22,7 +22,7 @@
             //Console.ReadLine();
 
             City city = new City(12, 12, 12, 20, 50, 0, 0);
-            Prison prison = new Prison(10, 10, 20, 22);
+            Prison prison = new Prison(10, 10, 0, 22);
             city.DisplayLocation();
             prison.DisplayLocation();
             

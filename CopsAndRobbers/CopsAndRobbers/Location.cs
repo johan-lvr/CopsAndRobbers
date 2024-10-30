@@ -16,7 +16,7 @@ namespace CopsAndRobbers
         public List<Robber> Prisoners { get; set; }
         public List<People> Peoples { get; set; }
         
-        public int?[,] CityGrid { get; set; }
+        public Dictionary<(int, int), List<int>> CityGrid { get; set; }
 
         public Location(int height, int width, int startPosX, int startPosY)
         {
@@ -24,7 +24,7 @@ namespace CopsAndRobbers
             Width = width;
             StartPosX = startPosX;
             StartPosY = startPosY;
-            CityGrid = new int?[width, height];
+            CityGrid = new Dictionary<(int, int), List<int>>();
             Peoples = new List<People>();
             //DisplayLocation();
         }
@@ -95,11 +95,17 @@ namespace CopsAndRobbers
         }
         private void InitCityGrid()
         {
-            for (int i = 0; i < Peoples.Count; i++)
+            for (int i = 0; i < Peoples.Count(); i++)
             {
-                CityGrid[Peoples[i].PosX, Peoples[i].PosY] = i;
+                CityGrid.Add((Peoples[i].PosX, Peoples[i].PosY), new List<int> {i});
             }
         }
+
+        private void UpdateCityGrid()
+        {
+
+        }
+
         private void CreatePeople(List<People> peoples, int ammountOfCitizen, int ammountOfTheifs, int ammountOfCops)
         {
             Random rnd = new Random();
