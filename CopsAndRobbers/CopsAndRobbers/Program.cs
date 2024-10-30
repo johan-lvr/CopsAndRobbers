@@ -31,7 +31,6 @@
                 {
                     City.Movement(i);
                     City.DisplayPeople(i);
-
                 }
                 Console.ReadKey();
             }
