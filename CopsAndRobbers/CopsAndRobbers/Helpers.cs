@@ -23,10 +23,10 @@ namespace CopsAndRobbers
             {
                 Console.SetCursorPosition(location.Peoples[currentPerson].PosX, location.Peoples[currentPerson].PosY);
                 Console.Write(" ");
-                //location.CityGrid[location.Peoples[currentPerson].PosX, location.Peoples[currentPerson].PosY] = null;
+                location.CityGrid[location.Peoples[currentPerson].PosX, location.Peoples[currentPerson].PosY] = null;
                 location.Peoples[currentPerson].PosY += location.Peoples[currentPerson].DirY;
                 location.Peoples[currentPerson].PosX += location.Peoples[currentPerson].DirX;
-                //location.CityGrid[location.Peoples[currentPerson].PosX, location.Peoples[currentPerson].PosY] = currentPerson;
+                location.CityGrid[location.Peoples[currentPerson].PosX, location.Peoples[currentPerson].PosY] = currentPerson;
             }
         }
     }

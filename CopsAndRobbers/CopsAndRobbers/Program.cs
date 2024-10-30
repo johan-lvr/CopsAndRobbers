@@ -23,6 +23,7 @@
 
             City City = new City(12, 12, 12, 20, 50);
             City.DisplayLocation();
+            //StolenGoods stolenGoods = new StolenGoods(City.Peoples[0].Goods[0].ItemName);
             
             while (true)
             {
