@@ -23,6 +23,26 @@ namespace CopsAndRobbers
             DirX = dirX; 
             DirY = dirY; 
         }
+        public void Move(Location location)
+        {
+            Random rnd = new Random();
+            if (PosX + DirX == 0 || PosX + DirX == location.Width ||
+                PosY + DirY == 0 || PosY + DirY == location.Height ||
+                (DirX == 0 && DirY == 0))
+            {
+                DirX = rnd.Next(-1, 2);
+                DirY = rnd.Next(-1, 2);
+            }
+            else
+            {
+                Console.SetCursorPosition(PosX, PosY);
+                Console.Write(" ");
+                //location.CityGrid[PosX, PosY] = null;
+                PosY += DirY;
+                PosX += DirX;
+                //location.CityGrid[PosX, PosY] = currentPerson;
+            }
+        }
     }
 
     class Citizen : People

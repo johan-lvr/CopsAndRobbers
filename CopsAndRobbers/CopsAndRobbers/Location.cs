@@ -8,6 +8,8 @@ namespace CopsAndRobbers
 {
     internal class Location
     {
+        public int StartPosX { get; set; }
+        public int StartPosY { get; set; }
         public int Height { get; set; }
         public int Width { get; set; }
         public List<string> News { get; set; }
@@ -16,26 +18,28 @@ namespace CopsAndRobbers
         
         public int?[,] CityGrid { get; set; }
 
-        public Location(int height, int width)
+        public Location(int height, int width, int startPosX, int startPosY)
         {
             Height = height;
             Width = width;
+            StartPosX = startPosX;
+            StartPosY = startPosY;
             CityGrid = new int?[width, height];
             Peoples = new List<People>();
             //DisplayLocation();
         }
 
-        public void DisplayPeople(int currentPerson)
+        public void DisplayPeople(People person)
         {
             //for (int i = 0; i < Peoples.Count; i++)
             //{
-                Console.SetCursorPosition(Peoples[currentPerson].PosX, Peoples[currentPerson].PosY);
-                if (Peoples[currentPerson] is Citizen)
+                Console.SetCursorPosition(person.PosX, person.PosY);
+                if (person is Citizen)
                 {
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.Write("C");
                 }
-                else if (Peoples[currentPerson] is Robber)
+                else if (person is Robber)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.Write("R");
@@ -59,13 +63,13 @@ namespace CopsAndRobbers
 
         public void DisplayLocation() // Draws city border
         {
-            
-            for (int col = 0; col <= Height; col++)
+            for (int col = StartPosY; col <= (StartPosY + Height); col++)
             {
-                for (int row = 0; row <= Width; row++)
+                Console.SetCursorPosition(StartPosX, col);
+                for (int row = StartPosX; row <= (StartPosX + Width); row++)
                 {
 
-                    if (col == 0 || col == Height || row == 0 || row == Width)
+                    if (col == StartPosY || col == (StartPosY + Height) || row == StartPosX || row == (StartPosX + Width))
                     {
                         Console.Write("X");
                     }
@@ -73,8 +77,6 @@ namespace CopsAndRobbers
                     {
                         Console.Write(" ");
                     }
-
-
                 }
                 Console.WriteLine();
             }
@@ -86,7 +88,7 @@ namespace CopsAndRobbers
         public int AmmountOfCitizen { get; }
         public int AmmountOfTheifs { get; }
         public int AmmountOfCops { get; }
-        public City(int ammountOfCitizen, int ammountOfTheifs, int ammountOfCops, int height, int width) : base(height, width)
+        public City(int ammountOfCitizen, int ammountOfTheifs, int ammountOfCops, int height, int width, int startPosX, int startPosY) : base(height, width, startPosX, startPosY)
         {
             CreatePeople(Peoples, ammountOfCitizen, ammountOfTheifs, ammountOfCops);
             // InitCityGrid();
@@ -119,7 +121,7 @@ namespace CopsAndRobbers
     }
     class Prison: Location
     {
-        public Prison(int height, int width) : base (width, height)
+        public Prison(int height, int width, int startPosX, int startPosY) : base (width, height, startPosX, startPosY)
         {
             
         }

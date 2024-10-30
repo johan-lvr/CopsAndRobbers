@@ -21,18 +21,26 @@
             //}
             //Console.ReadLine();
 
-            City City = new City(12, 12, 12, 20, 50);
-            City.DisplayLocation();
-            //StolenGoods stolenGoods = new StolenGoods(City.Peoples[0].Goods[0].ItemName);
+            City city = new City(12, 12, 12, 20, 50, 0, 0);
+            Prison prison = new Prison(10, 10, 20, 22);
+            city.DisplayLocation();
+            prison.DisplayLocation();
             
             while (true)
             {
-
-                for (int i = 0; i < City.Peoples.Count; i++)
+                foreach (People people in city.Peoples)
                 {
-                    Helpers.Movement2(i, City);
-                    City.DisplayPeople(i);
+
+                    people.Move(city);
+                    city.DisplayPeople(people);
                 }
+
+                //for (int i = 0; i < City.Peoples.Count; i++)
+                //{
+                //    Helpers.Movement2(i, City);
+                //    City.DisplayPeople(i);
+
+                //}
 
                 Console.ReadKey(true);
             }
