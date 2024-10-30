@@ -13,7 +13,7 @@ namespace CopsAndRobbers
         public int PosY { get; set; }
         public int DirX { get; set; }
         public int DirY { get; set; }
-        public List<Goods> Goods { get; set; }
+        public List<Goods> Inventory { get; set; }
 
         public People(string name, int posX, int posY, int dirX, int dirY)
         {
@@ -29,16 +29,16 @@ namespace CopsAndRobbers
     {
         public Citizen(string name, int posX, int posY, int dirX, int dirY) : base(name, posX, posY, dirX, dirY)   
         {
-            Goods = new List<Goods>();
-            CreateGoods(Goods);
+            Inventory = new List<Goods>();
+            CreateGoods(Inventory);
         }
 
         private void CreateGoods(List<Goods> goods)
         {
-            goods.Add(new Goods("keys"));
-            goods.Add(new Goods("phone"));
-            goods.Add(new Goods("dosh"));
-            goods.Add(new Goods("watch"));
+            goods.Add(new Belonings("keys"));
+            goods.Add(new Belonings("phone"));
+            goods.Add(new Belonings("dosh"));
+            goods.Add(new Belonings("watch"));
         }
     }
     class Robber : People

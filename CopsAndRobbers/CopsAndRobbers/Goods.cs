@@ -15,4 +15,27 @@ namespace CopsAndRobbers
             ItemName = itemName;
         }
     }
+    class Belonings : Goods
+    {
+        public Belonings(string stolenItemName) : base(stolenItemName)
+        {
+
+        }
+    }
+
+    class StolenGoods : Goods
+    {
+        public StolenGoods(string stolenItemName): base(stolenItemName) 
+        {
+            
+        }
+    }
+
+    class SizedGoods : Goods
+    {
+        public SizedGoods(string sizedItemName) : base(sizedItemName)
+        {
+
+        }
+    }
 }
