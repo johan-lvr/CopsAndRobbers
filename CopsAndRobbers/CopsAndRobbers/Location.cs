@@ -101,9 +101,20 @@ namespace CopsAndRobbers
             }
         }
 
-        private void UpdateCityGrid()
+        public void UpdateCityGrid(People people)
         {
-
+            
+            if (CityGrid.TryGetValue((people.PosX, people.PosY), out List<int> indexList))  //Bryta ut till egen metod...
+            {
+                indexList.Add(Peoples.IndexOf(people));
+                
+                //CityGrid.Add(people.PosX, people.PosY), 
+               
+            }
+            else
+            {
+                CityGrid.Add((people.PosX, people.PosY), new List<int> { Peoples.IndexOf(people) });
+            }
         }
 
         private void CreatePeople(List<People> peoples, int ammountOfCitizen, int ammountOfTheifs, int ammountOfCops)

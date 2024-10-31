@@ -20,9 +20,9 @@
             //    }
             //}
             //Console.ReadLine();
-
-            City city = new City(12, 12, 12, 20, 50, 0, 0);
-            Prison prison = new Prison(10, 10, 0, 22);
+            Console.CursorVisible = false;
+            City city = new City(12, 12, 12, 20, 80, 0, 0);
+            Prison prison = new Prison(20, 10, 0, 22);
             city.DisplayLocation();
             prison.DisplayLocation();
             
@@ -32,6 +32,7 @@
                 {
 
                     people.Move(city);
+                    city.UpdateCityGrid(people);
                     city.DisplayPeople(people);
                 }
 
@@ -42,7 +43,7 @@
 
                 //}
 
-                Console.ReadKey(true);
+                Thread.Sleep(200);
             }
         }
     }
