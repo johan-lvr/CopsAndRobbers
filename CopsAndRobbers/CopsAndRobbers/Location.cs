@@ -91,13 +91,13 @@ namespace CopsAndRobbers
         public City(int ammountOfCitizen, int ammountOfTheifs, int ammountOfCops, int height, int width, int startPosX, int startPosY) : base(height, width, startPosX, startPosY)
         {
             CreatePeople(Peoples, ammountOfCitizen, ammountOfTheifs, ammountOfCops);
-            // InitCityGrid();
+            InitCityGrid();
         }
         private void InitCityGrid()
         {
             for (int i = 0; i < Peoples.Count(); i++)
             {
-                CityGrid.Add((Peoples[i].PosX, Peoples[i].PosY), new List<int> {i});
+                UpdateCityGrid(Peoples[i]);
             }
         }
 
@@ -123,15 +123,15 @@ namespace CopsAndRobbers
 
             for (int i = 0; i < ammountOfCitizen; i++)
             {
-                peoples.Add(new Citizen($"Medbergoare{i}", rnd.Next(1, Width), rnd.Next(1, Height), rnd.Next(-1, 2), rnd.Next(-1, 2)));
+                peoples.Add(new Citizen($"Medborgare{i}", peoples.Count(), rnd.Next(1, Width), rnd.Next(1, Height), rnd.Next(-1, 2), rnd.Next(-1, 2)));
             }
             for (int i = 0; i < ammountOfTheifs; i++)
             {
-                peoples.Add(new Robber($"Tjuv{i}", rnd.Next(1, Width), rnd.Next(1, Height), rnd.Next(-1, 2), rnd.Next(-1, 2)));
+                peoples.Add(new Robber($"Tjuv{i}", peoples.Count(), rnd.Next(1, Width), rnd.Next(1, Height), rnd.Next(-1, 2), rnd.Next(-1, 2)));
             }
             for (int i = 0; i < ammountOfCops; i++)
             {
-                peoples.Add(new Cop($"Polis{i}", rnd.Next(1, Width), rnd.Next(1, Height), rnd.Next(-1, 2), rnd.Next(-1, 2)));
+                peoples.Add(new Cop($"Polis{i}", peoples.Count(), rnd.Next(1, Width), rnd.Next(1, Height), rnd.Next(-1, 2), rnd.Next(-1, 2)));
             }
         }
 

@@ -9,15 +9,17 @@ namespace CopsAndRobbers
     internal class People
     {
         public string Name { get; set; }
+        public int Id { get; set; }
         public int PosX { get; set; }
         public int PosY { get; set; }
         public int DirX { get; set; }
         public int DirY { get; set; }
         public List<Goods> Inventory { get; set; }
 
-        public People(string name, int posX, int posY, int dirX, int dirY)
+        public People(string name, int id, int posX, int posY, int dirX, int dirY)
         {
-            Name = name; 
+            Name = name;
+            Id = id;
             PosX = posX;
             PosY = posY; 
             DirX = dirX; 
@@ -37,7 +39,7 @@ namespace CopsAndRobbers
             {
                 Console.SetCursorPosition(PosX, PosY);
                 Console.Write(" ");
-                location.CityGrid.Remove((PosX, PosY));
+                location.CityGrid[(PosX, PosY)].Remove(this.Id);
                 PosY += DirY;
                 PosX += DirX;
                 
@@ -48,7 +50,7 @@ namespace CopsAndRobbers
 
     class Citizen : People
     {
-        public Citizen(string name, int posX, int posY, int dirX, int dirY) : base(name, posX, posY, dirX, dirY)   
+        public Citizen(string name, int id, int posX, int posY, int dirX, int dirY) : base(name, id, posX, posY, dirX, dirY)   
         {
             Inventory = new List<Goods>();
             CreateGoods(Inventory);
@@ -64,7 +66,7 @@ namespace CopsAndRobbers
     }
     class Robber : People
     {
-        public Robber(string name, int posX, int posY, int dirX, int dirY) : base(name, posX, posY, dirX, dirY)
+        public Robber(string name,int id, int posX, int posY, int dirX, int dirY) : base(name, id, posX, posY, dirX, dirY)
         {
 
         }
@@ -72,7 +74,7 @@ namespace CopsAndRobbers
 
     class Cop : People
     {
-        public Cop(string name, int posX, int posY, int dirX, int dirY) : base(name, posX, posY, dirX, dirY)
+        public Cop(string name, int id, int posX, int posY, int dirX, int dirY) : base(name, id, posX, posY, dirX, dirY)
         {
 
         }

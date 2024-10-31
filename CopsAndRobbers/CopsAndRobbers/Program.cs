@@ -35,7 +35,8 @@
                     city.UpdateCityGrid(people);
                     city.DisplayPeople(people);
                 }
-
+                bool test = (city.CityGrid.TryGetValue((1, 1), out List<int> index));
+                Console.WriteLine(test);
                 //for (int i = 0; i < City.Peoples.Count; i++)
                 //{
                 //    Helpers.Movement2(i, City);
