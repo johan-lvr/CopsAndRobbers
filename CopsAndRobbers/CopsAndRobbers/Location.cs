@@ -104,8 +104,12 @@ namespace CopsAndRobbers
         public void UpdateCityGrid(People people)
         {
             
-            if (CityGrid.TryGetValue((people.PosX, people.PosY), out List<int> indexList))  //Bryta ut till egen metod...
+            if (CityGrid.TryGetValue((people.PosX, people.PosY), out List<int> indexList))  //Bryta ut till egen metod... Fixat
             {
+                for (int i = 0; i < indexList.Count(); i++)
+                {
+                    people.Interaction(Peoples[indexList[i]]); // Skapa interaction
+                }
                 indexList.Add(Peoples.IndexOf(people));
                 
                 //CityGrid.Add(people.PosX, people.PosY), 
