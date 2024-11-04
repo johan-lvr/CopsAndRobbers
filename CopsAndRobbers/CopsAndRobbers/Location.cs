@@ -13,6 +13,7 @@ namespace CopsAndRobbers
         public int Height { get; set; }
         public int Width { get; set; }
         public List<string> News { get; set; }
+
         public List<Robber> Prisoners { get; set; }
         public List<People> Peoples { get; set; }
         
@@ -88,10 +89,13 @@ namespace CopsAndRobbers
         public int AmmountOfCitizen { get; }
         public int AmmountOfTheifs { get; }
         public int AmmountOfCops { get; }
+        
         public City(int ammountOfCitizen, int ammountOfTheifs, int ammountOfCops, int height, int width, int startPosX, int startPosY) : base(height, width, startPosX, startPosY)
         {
+            News = new List<string>();
             CreatePeople(Peoples, ammountOfCitizen, ammountOfTheifs, ammountOfCops);
             InitCityGrid();
+
         }
         private void InitCityGrid()
         {
@@ -108,7 +112,7 @@ namespace CopsAndRobbers
             {
                 for (int i = 0; i < indexList.Count(); i++)
                 {
-                    people.Interaction(Peoples[indexList[i]]); // Skapa interaction
+                    people.Interaction(Peoples[indexList[i]], this); // Skapa interaction
                 }
                 indexList.Add(Peoples.IndexOf(people));
                 

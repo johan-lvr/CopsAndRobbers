@@ -15,27 +15,27 @@ namespace CopsAndRobbers
             ItemName = itemName;
         }
     }
-    class Belongings : Goods
-    {
-        public Belongings(string stolenItemName) : base(stolenItemName)
-        {
+    //class Belongings : Goods
+    //{
+    //    public Belongings(string stolenItemName) : base(stolenItemName)
+    //    {
 
-        }
-    }
+    //    }
+    //}
 
-    class StolenGoods : Goods
-    {
-        public StolenGoods(string stolenItemName): base(stolenItemName) 
-        {
+    //class StolenGoods : Goods
+    //{
+    //    public StolenGoods(string stolenItemName): base(stolenItemName) 
+    //    {
             
-        }
-    }
+    //    }
+    //}
 
-    class SizedGoods : Goods
-    {
-        public SizedGoods(string sizedItemName) : base(sizedItemName)
-        {
+    //class SizedGoods : Goods
+    //{
+    //    public SizedGoods(string sizedItemName) : base(sizedItemName)
+    //    {
 
-        }
-    }
+    //    }
+    //}
 }
