@@ -25,6 +25,7 @@
             Prison prison = new Prison(20, 10, 0, 22);
             city.DisplayLocation();
             prison.DisplayLocation();
+
             
             while (true)
             {
@@ -34,6 +35,7 @@
                     people.Move(city);
                     city.UpdateCityGrid(people);
                     city.DisplayPeople(people);
+                    Render.NewsFeed(city.News,(city.Height+prison.Height+3));
                 }
                 //bool test = (city.CityGrid.TryGetValue((1, 1), out List<int> index));
                 //Console.WriteLine(test);
