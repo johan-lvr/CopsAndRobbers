@@ -53,12 +53,6 @@ namespace CopsAndRobbers
                 Console.ForegroundColor= ConsoleColor.White;
            // }
         }
-       
-
-        public void Interaction()
-        {
-
-        }
 
         
 
@@ -101,7 +95,19 @@ namespace CopsAndRobbers
         {
             for (int i = 0; i < Peoples.Count(); i++)
             {
-                UpdateCityGrid(Peoples[i]);
+                if (CityGrid.TryGetValue((Peoples[i].PosX, Peoples[i].PosY), out List<int> indexList))  //Bryta ut till egen metod... Fixat
+                {
+
+                    indexList.Add(Peoples[i].Id);
+
+                    //CityGrid.Add(people.PosX, people.PosY), 
+
+                }
+                else
+                {
+                    CityGrid.Add((Peoples[i].PosX, Peoples[i].PosY), new List<int> { Peoples.IndexOf(Peoples[i]) });
+                }
+                DisplayPeople(Peoples[i]);
             }
         }
 
@@ -113,15 +119,16 @@ namespace CopsAndRobbers
                 for (int i = 0; i < indexList.Count(); i++)
                 {
                     people.Interaction(Peoples[indexList[i]], this); // Skapa interaction
+                    Render.NewsFeed(News, (Width + 2));
                 }
-                indexList.Add(Peoples.IndexOf(people));
+                indexList.Add(people.Id);
                 
                 //CityGrid.Add(people.PosX, people.PosY), 
                
             }
             else
             {
-                CityGrid.Add((people.PosX, people.PosY), new List<int> { Peoples.IndexOf(people) });
+                CityGrid.Add((people.PosX, people.PosY), new List<int> { people.Id });
             }
         }
 

@@ -33,9 +33,10 @@
                 {
 
                     people.Move(city);
-                    city.UpdateCityGrid(people);
                     city.DisplayPeople(people);
-                    Render.NewsFeed(city.News,(city.Height+prison.Height+3));
+                    city.UpdateCityGrid(people);
+                    
+                    
                 }
                 //bool test = (city.CityGrid.TryGetValue((1, 1), out List<int> index));
                 //Console.WriteLine(test);
@@ -46,7 +47,7 @@
 
                 //}
 
-                Thread.Sleep(200);
+                Thread.Sleep(100);
             }
         }
     }

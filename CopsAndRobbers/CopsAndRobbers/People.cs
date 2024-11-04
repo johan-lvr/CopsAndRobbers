@@ -33,6 +33,7 @@ namespace CopsAndRobbers
                 PosY + DirY == 0 || PosY + DirY == location.Height ||
                 (DirX == 0 && DirY == 0))
             {
+                location.CityGrid[(this.PosX, this.PosY)].Remove(this.Id);
                 DirX = rnd.Next(-1, 2);
                 DirY = rnd.Next(-1, 2);
             }
@@ -40,16 +41,16 @@ namespace CopsAndRobbers
             {
                 Console.SetCursorPosition(PosX, PosY);
                 Console.Write(" ");
-                location.CityGrid[(PosX, PosY)].Remove(this.Id);
+                location.CityGrid[(this.PosX, this.PosY)].Remove(this.Id);
                 PosY += DirY;
                 PosX += DirX;
-                
-                
+
             }
+            
         }
         public virtual void Interaction(People people, Location location)
         {
-            location.News.Add($"{this.Name} hälsar på {people.Name}");
+            location.News.Add($"{this.Name} hälsar på {people.Name}.                ");
         }
     } 
 
@@ -79,6 +80,10 @@ namespace CopsAndRobbers
                 people.Interaction(this, location);
                 
             }
+            else
+            {
+                base.Interaction(people, location);
+            }
         }
     }
     class Robber : People
@@ -94,11 +99,15 @@ namespace CopsAndRobbers
             if (people is Citizen && people.Inventory.Count() > 0)
             {
                 StealFrom(people);
-                location.News.Add($"{this.Name} stal {this.Inventory.Last().ItemName} från {people.Name}.");
+                location.News.Add($"{this.Name} stal {this.Inventory.Last().ItemName} från {people.Name}.                ");
             }
             else if (people is Cop)
             {
                 people.Interaction(this, location);
+            }
+            else
+            {
+                base.Interaction(people, location);
             }
         }
         private void StealFrom(People people)
@@ -123,7 +132,11 @@ namespace CopsAndRobbers
             if (people is Robber && people.Inventory.Count() > 0)
             {
                 this.SeizedFrom(people);
-                location.News.Add($"{this.Name} beslagtog {this.Inventory.Count()} stöldgods från {people.Name}.");
+                location.News.Add($"{this.Name} beslagtog {this.Inventory.Count()} stöldgods från {people.Name}.                  ");
+            }
+            else
+            {
+                base.Interaction(people, location);
             }
         }
         private void SeizedFrom(People people)
