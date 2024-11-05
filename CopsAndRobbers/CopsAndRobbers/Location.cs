@@ -13,8 +13,8 @@ namespace CopsAndRobbers
         public int Height { get; set; }
         public int Width { get; set; }
         public List<string> News { get; set; }
+        public bool NewNews { get; set; }
 
-        public List<Robber> Prisoners { get; set; }
         public List<People> Peoples { get; set; }
         
         public Dictionary<(int, int), List<int>> CityGrid { get; set; }
@@ -27,54 +27,6 @@ namespace CopsAndRobbers
             StartPosY = startPosY;
             CityGrid = new Dictionary<(int, int), List<int>>();
             Peoples = new List<People>();
-            //DisplayLocation();
-        }
-
-        public void DisplayPeople(People person)
-        {
-            //for (int i = 0; i < Peoples.Count; i++)
-            //{
-                Console.SetCursorPosition(person.PosX, person.PosY);
-                if (person is Citizen)
-                {
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.Write("C");
-                }
-                else if (person is Robber)
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.Write("R");
-                }
-                else
-                {
-                    Console.ForegroundColor = ConsoleColor.Blue;
-                    Console.Write("P");
-                }
-                Console.ForegroundColor= ConsoleColor.White;
-           // }
-        }
-
-        
-
-        public void DisplayLocation() // Draws city border
-        {
-            for (int col = StartPosY; col <= (StartPosY + Height); col++)
-            {
-                Console.SetCursorPosition(StartPosX, col);
-                for (int row = StartPosX; row <= (StartPosX + Width); row++)
-                {
-
-                    if (col == StartPosY || col == (StartPosY + Height) || row == StartPosX || row == (StartPosX + Width))
-                    {
-                        Console.Write("X");
-                    }
-                    else
-                    {
-                        Console.Write(" ");
-                    }
-                }
-                Console.WriteLine();
-            }
         }
        
     }
@@ -88,10 +40,10 @@ namespace CopsAndRobbers
         {
             News = new List<string>();
             CreatePeople(Peoples, ammountOfCitizen, ammountOfTheifs, ammountOfCops);
-            InitCityGrid();
+            // InitCityGrid();
 
         }
-        private void InitCityGrid()
+        public void InitCityGrid()
         {
             for (int i = 0; i < Peoples.Count(); i++)
             {
@@ -100,14 +52,12 @@ namespace CopsAndRobbers
 
                     indexList.Add(Peoples[i].Id);
 
-                    //CityGrid.Add(people.PosX, people.PosY), 
-
                 }
                 else
                 {
                     CityGrid.Add((Peoples[i].PosX, Peoples[i].PosY), new List<int> { Peoples.IndexOf(Peoples[i]) });
                 }
-                DisplayPeople(Peoples[i]);
+                Render.DisplayPeople(Peoples[i]);
             }
         }
 
@@ -119,7 +69,7 @@ namespace CopsAndRobbers
                 for (int i = 0; i < indexList.Count(); i++)
                 {
                     people.Interaction(Peoples[indexList[i]], this); // Skapa interaction
-                    Render.NewsFeed(News, (Width + 2));
+                    NewNews = true;
                 }
                 indexList.Add(people.Id);
                 
