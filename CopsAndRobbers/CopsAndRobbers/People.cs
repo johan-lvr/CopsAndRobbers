@@ -26,16 +26,50 @@ namespace CopsAndRobbers
             DirX = dirX; 
             DirY = dirY; 
         }
+        public void SetDirection(Location location)
+        {
+            var directions = new List<(int, int)>
+            {
+            { (0, 1) },    // Up
+            { (0, -1) },   // Down
+            { (1, 0) },    // Right
+            { (-1, 0) },   // Left
+            { (1, 1) },    // Up-right
+            { (-1, 1) },   // Up-left
+            { (1, -1) },   // Down-right
+            { (-1, -1) }   // Down-left
+            };
+            var newDirections = new List<(int, int)>();
+
+            foreach (var direction in directions)
+            {
+                int newX = PosX + direction.Item1;
+                int newY = PosY + direction.Item2;
+
+                // Check if the target position is within grid bounds
+                if ((PosX + DirX != 0 || PosX + DirX != location.Width ||
+                      PosY + DirY != 0 || PosY + DirY != location.Height))
+                {
+                    newDirections.Add(direction);
+                }
+            }
+
+            Random rand = new Random();
+            int rndDir = rand.Next(0, newDirections.Count());
+
+            DirX = newDirections.ElementAt(rndDir).Item1;
+            DirY = newDirections.ElementAt(rndDir).Item2;
+        }
         public void Move(Location location)
         {
-            Random rnd = new Random();
+            
             if (PosX + DirX == 0 || PosX + DirX == location.Width ||
                 PosY + DirY == 0 || PosY + DirY == location.Height ||
                 (DirX == 0 && DirY == 0))
             {
                 location.CityGrid[(this.PosX, this.PosY)].Remove(this.Id);
-                DirX = rnd.Next(-1, 2);
-                DirY = rnd.Next(-1, 2);
+                SetDirection(location);
+                
             }
             else
             {
