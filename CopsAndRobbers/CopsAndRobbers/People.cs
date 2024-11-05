@@ -15,6 +15,8 @@ namespace CopsAndRobbers
         public int DirX { get; set; }
         public int DirY { get; set; }
         public virtual List<Goods> Inventory { get; set; }
+        public int MaxX { get; set; }
+        public int MaxY { get; set; }
 
 
         public People(string name, int id, Location location)
@@ -22,15 +24,17 @@ namespace CopsAndRobbers
             Name = name;
             Id = id;
             SetPosition(location);
-            SetDirection(location);
+            SetDirection();
         }
         public void SetPosition(Location location)
         {
             Random random = new Random();
             PosX = random.Next(1,location.Width);
             PosY = random.Next(1,location.Height);
+            MaxX = location.Width;
+            MaxY = location.Height;
         }
-        public void SetDirection(Location location)
+        public void SetDirection()
         {
             var directions = new List<(int, int)>
             {
@@ -51,8 +55,8 @@ namespace CopsAndRobbers
                 int newY = PosY + direction.Item2;
 
                 // Check if the target position is within grid bounds
-                if ((PosX + DirX != 0 || PosX + DirX != location.Width ||
-                      PosY + DirY != 0 || PosY + DirY != location.Height))
+                if ((PosX + DirX != 0 || PosX + DirX != MaxX ||
+                      PosY + DirY != 0 || PosY + DirY != MaxY))
                 {
                     newDirections.Add(direction);
                 }
@@ -67,13 +71,11 @@ namespace CopsAndRobbers
         public void Move(Location location)
         {
             
-            if (PosX + DirX == 0 || PosX + DirX == location.Width ||
-                PosY + DirY == 0 || PosY + DirY == location.Height ||
-                (DirX == 0 && DirY == 0))
+            if (PosX + DirX == 0 || PosX + DirX == MaxX ||
+                PosY + DirY == 0 || PosY + DirY == MaxY )
             {
                 location.CityGrid[(this.PosX, this.PosY)].Remove(this.Id);
-                SetDirection(location);
-                
+                SetDirection();
             }
             else
             {

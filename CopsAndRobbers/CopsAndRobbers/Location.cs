@@ -72,7 +72,7 @@ namespace CopsAndRobbers
                     NewNews = true;
                 }
                 
-                if(indexList.Count() > 0) people.SetDirection(this);
+                if(indexList.Count() > 0) people.SetDirection();
                 indexList.Add(people.Id);
                 
                 //CityGrid.Add(people.PosX, people.PosY), 
