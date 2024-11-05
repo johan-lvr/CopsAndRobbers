@@ -17,14 +17,18 @@ namespace CopsAndRobbers
         public virtual List<Goods> Inventory { get; set; }
 
 
-        public People(string name, int id, int posX, int posY, int dirX, int dirY)
+        public People(string name, int id, Location location)
         {
             Name = name;
             Id = id;
-            PosX = posX;
-            PosY = posY; 
-            DirX = dirX; 
-            DirY = dirY; 
+            SetPosition(location);
+            SetDirection(location);
+        }
+        public void SetPosition(Location location)
+        {
+            Random random = new Random();
+            PosX = random.Next(1,location.Width);
+            PosY = random.Next(1,location.Height);
         }
         public void SetDirection(Location location)
         {
@@ -94,7 +98,7 @@ namespace CopsAndRobbers
     {
         private List<Goods> Belongings;
         public override List<Goods> Inventory { get { return this.Belongings; } set => this.Belongings = value; }
-        public Citizen(string name, int id, int posX, int posY, int dirX, int dirY) : base(name, id, posX, posY, dirX, dirY)   
+        public Citizen(string name, int id, Location location) : base(name, id, location)   
         {
             Belongings = new List<Goods>();
             CreateGoods(Belongings);
@@ -124,7 +128,7 @@ namespace CopsAndRobbers
     {
         private List<Goods> Loot;
         public override List<Goods> Inventory { get => this.Loot; set => this.Loot = value; }
-        public Robber(string name,int id, int posX, int posY, int dirX, int dirY) : base(name, id, posX, posY, dirX, dirY)
+        public Robber(string name, int id, Location location) : base(name, id, location)
         {
             Loot = new List<Goods>();
         }
@@ -157,7 +161,7 @@ namespace CopsAndRobbers
     {
         private List<Goods> SeizedGoods;
         public override List<Goods> Inventory { get => this.SeizedGoods; set => this.SeizedGoods = value; }
-        public Cop(string name, int id, int posX, int posY, int dirX, int dirY) : base(name, id, posX, posY, dirX, dirY)
+        public Cop(string name, int id, Location location) : base(name, id, location)
         {
             SeizedGoods = new List<Goods>();
         }

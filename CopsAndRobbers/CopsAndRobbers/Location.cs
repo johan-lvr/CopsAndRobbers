@@ -71,6 +71,8 @@ namespace CopsAndRobbers
                     people.Interaction(Peoples[indexList[i]], this); // Skapa interaction
                     NewNews = true;
                 }
+                
+                if(indexList.Count() > 0) people.SetDirection(this);
                 indexList.Add(people.Id);
                 
                 //CityGrid.Add(people.PosX, people.PosY), 
@@ -84,26 +86,25 @@ namespace CopsAndRobbers
 
         private void CreatePeople(List<People> peoples, int ammountOfCitizen, int ammountOfTheifs, int ammountOfCops)
         {
-            Random rnd = new Random();
 
             for (int i = 0; i < ammountOfCitizen; i++)
             {
-                peoples.Add(new Citizen($"Medborgare{i}", peoples.Count(), rnd.Next(1, Width), rnd.Next(1, Height), rnd.Next(-1, 2), rnd.Next(-1, 2)));
+                peoples.Add(new Citizen($"Medborgare{i}", peoples.Count(), this));
             }
             for (int i = 0; i < ammountOfTheifs; i++)
             {
-                peoples.Add(new Robber($"Tjuv{i}", peoples.Count(), rnd.Next(1, Width), rnd.Next(1, Height), rnd.Next(-1, 2), rnd.Next(-1, 2)));
+                peoples.Add(new Robber($"Tjuv{i}", peoples.Count(), this));
             }
             for (int i = 0; i < ammountOfCops; i++)
             {
-                peoples.Add(new Cop($"Polis{i}", peoples.Count(), rnd.Next(1, Width), rnd.Next(1, Height), rnd.Next(-1, 2), rnd.Next(-1, 2)));
+                peoples.Add(new Cop($"Polis{i}", peoples.Count(), this));
             }
         }
 
     }
     class Prison: Location
     {
-        public Prison(int height, int width, int startPosX, int startPosY) : base (width, height, startPosX, startPosY)
+        public Prison(int height, int width, int startPosX, int startPosY) : base (height, width, startPosX, startPosY)
         {
             
         }

@@ -8,7 +8,7 @@
             
             // Instansierat subklass okbjekten city och prison
             City city = new City(12, 12, 12, 20, 80, 0, 0);
-            Prison prison = new Prison(20, 10, 0, 22);
+            Prison prison = new Prison(10, 20, 0, 22);
 
             //Ritar upp de visuella i konsollen från objekten
             Render.DisplayLocation(city);
